@@ -2,9 +2,15 @@ buildscript {
     ext {
         springBootVersion = '2.1.6.RELEASE'
     }
-    repositories {
-        mavenCentral()
-    }
+    repositories { 
+    maven { 
+        url 'https://pkgs.dev.azure.com/cristianhenrique/testejavaartifacts/_packaging/gradletest/maven/v1' 
+        credentials { 
+            username "{FeedName}" 
+            password System.getenv("SYSTEM_ACCESSTOKEN") != null ? System.getenv("SYSTEM_ACCESSTOKEN") : vstsMavenAccessToken 
+        } 
+    } 
+} 
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
