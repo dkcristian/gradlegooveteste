@@ -2,15 +2,9 @@ buildscript {
     ext {
         springBootVersion = '2.1.6.RELEASE'
     }
-    repositories { 
-    maven { 
-        url 'https://pkgs.dev.azure.com/cristianhenrique/testejavaartifacts/_packaging/gradletest/maven/v1' 
-        credentials { 
-            username "{FeedName}" 
-            password System.getenv("SYSTEM_ACCESSTOKEN") != null ? System.getenv("SYSTEM_ACCESSTOKEN") : vstsMavenAccessToken 
-        } 
-    } 
-} 
+    repositories {
+        mavenCentral()
+    }
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
     }
@@ -24,9 +18,14 @@ group = 'com.okta.springbootgradle'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
+repositories { 
+    maven { 
+        url 'https://pkgs.dev.azure.com/cristianhenrique/testejavaartifacts/_packaging/gradletest/maven/v1' 
+        credentials { 
+            username "gradletest" 
+            password System.getenv("SYSTEM_ACCESSTOKEN") != null ? System.getenv("SYSTEM_ACCESSTOKEN") : vstsMavenAccessToken 
+        } 
+} 
 
 dependencies {
     implementation( 'com.okta.spring:okta-spring-boot-starter:1.2.1' )
